@@ -6,20 +6,20 @@ import (
 	"gorm.io/gorm"
 )
 
-var Database *gorm.DB
+var Connection *gorm.DB
 
 func Connect(databasePath string) error {
 	var err error
 
-	Database, err = gorm.Open(sqlite.Open(databasePath), &gorm.Config{})
+	Connection, err = gorm.Open(sqlite.Open(databasePath), &gorm.Config{})
 
 	if err != nil {
 		return err
 	}
 
-	Database.AutoMigrate(&models.IntranetConfig{})
-	Database.AutoMigrate(&models.NetworkConfig{})
-	Database.AutoMigrate(&models.User{})
+	Connection.AutoMigrate(&models.IntranetConfig{})
+	Connection.AutoMigrate(&models.NetworkConfig{})
+	Connection.AutoMigrate(&models.User{})
 
 	return nil
 }

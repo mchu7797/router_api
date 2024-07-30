@@ -12,7 +12,7 @@ func main() {
 	app := fiber.New()
 	controller.HookHandler(app)
 
-	err := database.Connect("router_api.db")
+	err := database.Connect("example.db")
 
 	if err != nil {
 		panic(err)
