@@ -10,15 +10,13 @@ import (
 
 func main() {
 	app := fiber.New()
+	controller.HookHandler(app)
 
-	app.Get("/login", controller.Login)
-	app.Get("/intranet", controller.GetIntranet)
-	app.Get("/network", controller.GetNetwork)
-	app.Get("/user", controller.GetUser)
+	err := database.Connect("router_api.db")
 
-	app.Get("/", controller.Index)
-
-	database.Init("example.db")
+	if err != nil {
+		panic(err)
+	}
 
 	log.Fatal(app.Listen(":2024"))
 }
